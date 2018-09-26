@@ -37,12 +37,11 @@ def login():
     )
     Session.new(form)
 
-    redirection = redirect(url_for('user.login_view', result='{}'.format(result)))
+    redirection = redirect(url_for('public.index', result='{}'.format(result)))
     response = current_app.make_response(redirection)
     response.set_cookie('session_id', session_id, path='/')
 
     return response
-
 
 @bp.route('/user/login/view', methods=['GET'])
 def login_view():
@@ -67,7 +66,7 @@ def register():
     u, result = User.register(form)
     log('register post', result)
 
-    redirection = redirect(url_for('user.register_view', result='{}'.format(result)))
+    redirection = redirect(url_for('.login_view', result='{}'.format(result)))
     response = current_app.make_response(redirection)
     return response
 
